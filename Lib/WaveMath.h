@@ -20,7 +20,7 @@ namespace WaveMath {
         const uint32_t numSamples = bufferBytes / sizeof(SAMPLE_TYPE);
         auto * audioBuffer = reinterpret_cast<SAMPLE_TYPE*>(audioBuffer_Raw);
         const double cyclesPerSample = cyclesPerSec / static_cast<double>(sampleRate);
-        const double factor = cyclesPerSample * pi; // Not particularly sure what to call this constant
+        const double factor = cyclesPerSample * 2 * pi; // Not particularly sure what to call this constant
         const double phaseOffset = factor * startSample;
         for(uint32_t i = 0; i < numSamples; ++i) {
             const double normal = sin(i * factor + phaseOffset);
