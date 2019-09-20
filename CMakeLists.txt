@@ -3,5 +3,5 @@ project(SineOrgan)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(SineOrgan main.cpp Lib/WaveMath.h Interface/OrganInterface.h Base/InstrumentBase.cpp Base/InstrumentBase.h Interface/OutputDeviceInterface.h Concrete/OutputDeviceSDL.cpp Concrete/OutputDeviceSDL.h Concrete/SineOrgan.cpp Concrete/SineOrgan.h)
+add_executable(SineOrgan main.cpp Lib/WaveMath.h Interface/OrganInterface.h Base/InstrumentBase.cpp Base/InstrumentBase.h Interface/OutputDeviceInterface.h Concrete/OutputDeviceSDL.cpp Concrete/OutputDeviceSDL.h Concrete/SineOrgan.cpp Concrete/SineOrgan.h Concrete/InputDeviceSDL.cpp Concrete/InputDeviceSDL.h)
 target_link_libraries(SineOrgan libSDL2.so)

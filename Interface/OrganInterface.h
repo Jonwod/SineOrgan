@@ -14,6 +14,8 @@ public:
      These functions return true if the key exists or false otherwise.*/
     virtual bool pressKey(int key) = 0;
     virtual bool releaseKey(int key) = 0;
+
+    virtual unsigned int numKeys() const = 0;
 };
 
 #endif //SINEORGAN_ORGANINTERFACE_H

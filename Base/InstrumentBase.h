@@ -38,7 +38,6 @@ protected:
     virtual void updateBufferDerived(uint32_t startSample) = 0;
 
     inline uint32_t getSampleRate() const {return _sampleRate;}
-    virtual void onUpdate() {};
     std::vector<SampleType> _privateBuffer;
 private:
     uint32_t _sampleRate = 0;
