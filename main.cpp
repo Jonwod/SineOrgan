@@ -5,7 +5,13 @@
 int main() {
     SineOrgan organ;
     organ.connectTo(&OutputDeviceSDL::get());
-    organ.run();
+
+    // Update instrument(s)
+    while(true) {
+        if(organ.isBufferDirty()) {
+            organ.update_buffer();
+        }
+    }
 
     return 0;
 }

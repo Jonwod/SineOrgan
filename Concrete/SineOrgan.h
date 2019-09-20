@@ -16,7 +16,9 @@ public:
     bool releaseKey(int key) override { _keyPressed = false; return true; };
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    void update_buffer(unsigned int startSample) override;
+protected:
+    void updateBufferDerived(unsigned int startSample) override;
+    void onUpdate() override;
 private:
     // Single key organ for testing
     bool _keyPressed = false;

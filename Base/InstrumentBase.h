@@ -30,14 +30,15 @@ public:
     const std::vector<SampleType>& getPrivateBuffer() const { return _privateBuffer; };
 
     inline void setBufferDirty() { _bufferDirty = true; };
+    inline bool isBufferDirty() { return _bufferDirty; };
 
-    // Will run indefinitely
-    void run();
-
-    // Subclass should implement this to write what it wants to the buffer
-    virtual void update_buffer(unsigned int startSample) {};
+    void update_buffer();
 protected:
+    // Subclass should implement this to write what it wants to the buffer
+    virtual void updateBufferDerived(uint32_t startSample) = 0;
+
     inline uint32_t getSampleRate() const {return _sampleRate;}
+    virtual void onUpdate() {};
     std::vector<SampleType> _privateBuffer;
 private:
     uint32_t _sampleRate = 0;
