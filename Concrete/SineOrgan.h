@@ -24,7 +24,11 @@ public:
 protected:
     void updateBufferDerived(unsigned int startSample) override;
 private:
+    // Calculates the fundamental frequency for the specified key.
+    double freqOfKey(int key) const;
     std::vector<bool> _keyStates;
+    const double _baseFrequency = 40.0;
+    const int _maxNotes = 5;
 };
 
 #endif //SINEORGAN_SINEORGAN_H

@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "SDL2/SDL.h"
+#include <algorithm>
 #include "SineOrgan.h"
 #include "../Lib/WaveMath.h"
 
@@ -13,18 +13,21 @@ SineOrgan::SineOrgan(int numKeys) {
 }
 
 
-void SineOrgan::updateBufferDerived(unsigned int startSample) {
-    // TODO: Placeholder just plays tone if any key is pressed.
-    for(bool pressed: _keyStates) {
-        if(pressed) {
-            WaveMath::writeSine<SampleType>(_privateBuffer.data(), _privateBuffer.size() * sizeof(SampleType),
-                                            getSampleRate(),440, startSample);
-            return;
-        }
-    }
+double SineOrgan::freqOfKey(int key) const {
+    return _baseFrequency + key * _baseFrequency * 1.5;
+}
 
-    for(auto& elem: _privateBuffer) {
-        elem = 0;
+
+void SineOrgan::updateBufferDerived(unsigned int startSample) {
+    std::fill(_privateBuffer.begin(), _privateBuffer.end(), 0);
+
+    // TODO: Placeholder just plays tone if any key is pressed.
+    for(int i = 0; i < _keyStates.size(); ++i) {
+        if(_keyStates[i]) {
+            const auto freq = freqOfKey(i);
+            WaveMath::addSine(_privateBuffer.data(), _privateBuffer.size(),
+                    getSampleRate(),freq, std::numeric_limits<SampleType>::max() / _maxNotes, startSample);
+        }
     }
 }
 
