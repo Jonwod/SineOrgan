@@ -15,23 +15,15 @@ public:
     explicit SineOrgan(int numKeys = 26);
 
     // ~~~~~~~~ OrganInterface ~~~~~~~~~~
-    bool pressKey(int key) override {
-        _keyPressed = true;
-        return true;
-    };
+    bool pressKey(int key) override;
 
-    bool releaseKey(int key) override {
-        _keyPressed = false;
-        return true;
-    };
+    bool releaseKey(int key) override;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     unsigned int numKeys() const override { return _keyStates.size();}
 protected:
     void updateBufferDerived(unsigned int startSample) override;
 private:
-    // Single key organ for testing
-    bool _keyPressed = false;
     std::vector<bool> _keyStates;
 };
 

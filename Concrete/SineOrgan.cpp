@@ -28,3 +28,21 @@ void SineOrgan::updateBufferDerived(unsigned int startSample) {
     }
 }
 
+
+bool SineOrgan::pressKey(int key) {
+    if(key >= 0  &&  key < _keyStates.size()) {
+        _keyStates[key] = true;
+        return true;
+    }
+    return false;
+}
+
+
+bool SineOrgan::releaseKey(int key) {
+    if(key >= 0  &&  key < _keyStates.size()) {
+        _keyStates[key] = false;
+        return true;
+    }
+    return false;
+}
+

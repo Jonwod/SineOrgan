@@ -19,6 +19,7 @@ public:
     bool isKeyPressed(int keyIndex) const;
 private:
     InputDeviceSDL();
+    ~InputDeviceSDL();
     std::vector<bool> _keyPressedStates;
 };
 

@@ -5,6 +5,7 @@
 #include "InputDeviceSDL.h"
 #include <vector>
 #include <array>
+#include <iostream>
 #include "SDL2/SDL.h"
 
 
@@ -45,18 +46,47 @@ const std::array<SDL_Scancode, 26> keyCodes = {
 };
 
 
+// Singleton hidden state
+SDL_Window *window = nullptr;
+// ~~~~~~~~~~~~~~~~~~~~~~
+
 
 InputDeviceSDL::InputDeviceSDL() {
     // Currently supporting 26 keys, but this needs to be kept up-to-date
     _keyPressedStates = std::vector<bool>(26, false);
+
+    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS);
+
+    // Create an application window with the following settings:
+    window = SDL_CreateWindow(
+            "An SDL2 window",                  // window title
+            SDL_WINDOWPOS_UNDEFINED,           // initial x position
+            SDL_WINDOWPOS_UNDEFINED,           // initial y position
+            640,                               // width, in pixels
+            480,                               // height, in pixels
+            SDL_WINDOW_OPENGL                  // flags - see below
+    );
+
+    // Check that the window was successfully created
+    if (window == nullptr) {
+        // In the case that the window could not be made...
+        std::cerr<<"Could not create window:"<< SDL_GetError() <<"\n";
+    }
 }
 
 
 bool InputDeviceSDL::isKeyPressed(int keyIndex) const {
+    SDL_PumpEvents();   // TODO: Should this really be here?
+
     if(keyIndex >= keyCodes.size())
         return false;
-    std::vector<int> pressedKeys;
     const Uint8 *keyboardState = SDL_GetKeyboardState(NULL);
     const SDL_Scancode SDLKey = keyCodes[keyIndex];
     return keyboardState[SDLKey];
+}
+
+
+InputDeviceSDL::~InputDeviceSDL() {
+    // Close and destroy the window
+    SDL_DestroyWindow(window);
 }

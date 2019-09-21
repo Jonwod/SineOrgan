@@ -43,7 +43,7 @@ void audioCallbackSDL(void* userData, Uint8* stream, int streamLength) {
 
 
 OutputDeviceSDL::OutputDeviceSDL() {
-    SDL_Init(SDL_INIT_EVERYTHING);
+    SDL_Init(SDL_INIT_AUDIO);
 
     SDL_AudioSpec desiredAudioSpec;
 
