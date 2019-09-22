@@ -6,8 +6,22 @@
 #define SINEORGAN_SINEORGAN_H
 
 #include <vector>
+#include <cmath>
 #include "../Base/InstrumentBase.h"
 #include "../Interface/OrganInterface.h"
+
+
+// ~~~~~~~~ Frequency Functions ~~~~~~~~~~
+double equalTemperament(unsigned int octaveDiv, double baseFreq, int note);
+
+double equalTemperament12(int note);
+
+double equalTemperament5(int note);
+
+double equalTemperament7(int note);
+
+double weirdFreqFunc1(int note);
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class SineOrgan: public InstrumentBase, public OrganInterface {
@@ -21,13 +35,16 @@ public:
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     unsigned int numKeys() const override { return _keyStates.size();}
+
+    // A frequency function takes an integer corresponding to a key and returns
+    // a frequency
+    typedef double (*FrequencyFunction)(int);
 protected:
     void updateBufferDerived(unsigned int startSample) override;
 private:
-    // Calculates the fundamental frequency for the specified key.
-    double freqOfKey(int key) const;
+    FrequencyFunction _frequencyFunction = equalTemperament7;
+
     std::vector<bool> _keyStates;
-    const double _baseFrequency = 40.0;
     const int _maxNotes = 5;
 };
 
