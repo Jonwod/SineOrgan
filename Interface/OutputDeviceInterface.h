@@ -5,7 +5,7 @@
 #ifndef SINEORGAN_OUTPUTDEVICEINTERFACE_H
 #define SINEORGAN_OUTPUTDEVICEINTERFACE_H
 
-#include <stdint-gcc.h>
+#include <cstdint>
 
 // This cannot be dynamic so I have chosen for now to keep it here
 typedef int32_t SampleType;
