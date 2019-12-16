@@ -75,6 +75,10 @@ OutputDeviceSDL::OutputDeviceSDL() {
 }
 
 
+void OutputDeviceSDL::stop() {
+    SDL_PauseAudioDevice(_device, 1);
+}
+
 
 OutputDeviceSDL::~OutputDeviceSDL() {
     SDL_CloseAudioDevice(_device);

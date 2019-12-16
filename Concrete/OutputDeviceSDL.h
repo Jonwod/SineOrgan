@@ -27,6 +27,9 @@ public:
     uint32_t getBufferSizeInSamples() override;
     uint32_t startSampleOfPendingBuffer() const override;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    // Stop the audio stream
+    void stop();
 private:
     OutputDeviceSDL();
 
