@@ -11,12 +11,10 @@ int main() {
     // Update instrument(s)
     bool running = true;
     while(running) {
-        // TODO: Fix crash:
-        /* /Concrete/OutputDeviceSDL.cpp:32: void audioCallbackSDL(void*, Uint8*, int): Assertion `instrument->getPrivateBuffer().size() == bufferLen' failed.
-            Aborted (core dumped) */
-
-        if(InputDeviceSDL::get().isEscPressed())
+        if(InputDeviceSDL::get().isEscPressed()) {
             running = false;
+            OutputDeviceSDL::get().stop();
+        }
 
         if(organ.isBufferDirty()) {
             for(int i = 0; i < organ.numKeys(); ++i) {
