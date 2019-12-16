@@ -75,14 +75,23 @@ InputDeviceSDL::InputDeviceSDL() {
 }
 
 
-bool InputDeviceSDL::isKeyPressed(int keyIndex) const {
+bool isSDLKeyPressed(SDL_Scancode scancode) {
     SDL_PumpEvents();   // TODO: Should this really be here?
+    const Uint8 *keyboardState = SDL_GetKeyboardState(NULL);
+    return keyboardState[scancode];
+}
 
+
+bool InputDeviceSDL::isKeyPressed(int keyIndex) const {
     if(keyIndex >= keyCodes.size())
         return false;
-    const Uint8 *keyboardState = SDL_GetKeyboardState(NULL);
-    const SDL_Scancode SDLKey = keyCodes[keyIndex];
-    return keyboardState[SDLKey];
+    keyCodes[keyIndex];
+    return isSDLKeyPressed(keyCodes[keyIndex]);
+}
+
+
+bool InputDeviceSDL::isEscPressed() const {
+    return isSDLKeyPressed(SDL_SCANCODE_ESCAPE);
 }
 
 

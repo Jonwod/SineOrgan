@@ -9,7 +9,15 @@ int main() {
     organ.connectTo(&OutputDeviceSDL::get());
 
     // Update instrument(s)
-    while(true) {
+    bool running = true;
+    while(running) {
+        // TODO: Fix crash:
+        /* /Concrete/OutputDeviceSDL.cpp:32: void audioCallbackSDL(void*, Uint8*, int): Assertion `instrument->getPrivateBuffer().size() == bufferLen' failed.
+            Aborted (core dumped) */
+
+        if(InputDeviceSDL::get().isEscPressed())
+            running = false;
+
         if(organ.isBufferDirty()) {
             for(int i = 0; i < organ.numKeys(); ++i) {
                 // TODO: this should probably be using events

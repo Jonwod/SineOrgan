@@ -17,6 +17,8 @@ public:
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     bool isKeyPressed(int keyIndex) const;
+
+    bool isEscPressed() const;
 private:
     InputDeviceSDL();
     ~InputDeviceSDL();
