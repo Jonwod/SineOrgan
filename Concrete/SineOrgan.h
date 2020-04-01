@@ -42,7 +42,7 @@ public:
 protected:
     void updateBufferDerived(unsigned int startSample) override;
 private:
-    FrequencyFunction _frequencyFunction = equalTemperament7;
+    FrequencyFunction _frequencyFunction = weirdFreqFunc1;
 
     std::vector<bool> _keyStates;
     const int _maxNotes = 5;

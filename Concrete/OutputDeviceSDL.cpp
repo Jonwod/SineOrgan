@@ -71,6 +71,10 @@ OutputDeviceSDL::OutputDeviceSDL() {
         std::cerr << "Error: " << SDL_GetError() << std::endl;
     }
 
+    if(_obtainedAudioSpec.format != desiredAudioSpec.format) {
+        std::cout<<"Did not get requested audio format. Requested "<<desiredAudioSpec.format<<"  acquired "<<_obtainedAudioSpec.format<<std::endl;
+    }
+
     SDL_PauseAudioDevice(_device, 0);
 }
 

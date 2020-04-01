@@ -17,6 +17,7 @@ public:
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     bool isKeyPressed(int keyIndex) const;
+    const std::vector<bool> getKeyPressedStates() const { return _keyPressedStates; };
 
     bool isEscPressed() const;
 private:
